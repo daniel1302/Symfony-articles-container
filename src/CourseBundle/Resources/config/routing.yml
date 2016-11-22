@@ -1,3 +1,7 @@
 course_homepage:
     path:     /
     defaults: { _controller: CourseBundle:Default:index }
+
+test_routing_group:
+    resource: "@CourseBundle/Resources/config/routing/test.yml"
+    prefix:   /test
