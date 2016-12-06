@@ -1,0 +1,7 @@
+account_login:
+    path:     /login
+    defaults: { _controller: AppBundle:Account:login }
+    
+account_register:
+    path:     /rejestracja
+    defaults: { _controller: AppBundle:Account:register }

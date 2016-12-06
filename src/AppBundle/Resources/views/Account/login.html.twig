@@ -1,0 +1,51 @@
+{% extends "AppBundle:Layout:layout.html.twig" %}
+
+{% block content %}
+    
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <form action="{{ path('account_login') }}" method="post">
+        <div class="row">
+            <div class="span12 col-sm-6 col-sm-offset-3">
+                  <fieldset>
+                    <div id="legend">
+                      <legend class="">Login</legend>
+                    </div>
+                    <div class="control-group">
+                      <!-- Username -->
+                      <label class="control-label"  for="username">Username</label>
+                      <div class="controls">
+                            <input type="text" id="username" name="_username" value="{{ last_username }}" class="input-xlarge" />
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <!-- Password-->
+                      <label class="control-label" for="password">Password</label>
+                      <div class="controls">
+                          <input type="password" id="password" name="_password" class="input-xlarge" />
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <!-- Button -->
+                      <div class="controls">                    
+                        <button type="submit" class="btn btn-success">login</button>
+                      </div>
+                    </div>
+                  </fieldset>
+            </div>
+        </div>
+        
+
+        {#
+            If you want to control the URL the user
+            is redirected to on success (more details below)
+            <input type="hidden" name="_target_path" value="/account" />
+        #}
+
+        
+    </form>
+
+{% endblock %}
+

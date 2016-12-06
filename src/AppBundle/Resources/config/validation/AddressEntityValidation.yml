@@ -1,0 +1,16 @@
+AppBundle\Entity\Address:    
+    properties:
+        postcode:
+            - Regex:
+                pattern: '/^(|\d{2}\-\d{3})$/'
+                message: "Kod pocztowy jest niepoprawny"
+
+        street: 
+            - Regex:
+                pattern: '/^(|[a-z0-9\040\.\-]+)$/'
+                message: "Podaj poprawną nazwę ulicy"
+                
+        city:
+            - Regex:
+                pattern: '/^(|[a-z0-9\040\.\-]+)$/'
+                message: "Podaj poprawną nazwę miejscowości"

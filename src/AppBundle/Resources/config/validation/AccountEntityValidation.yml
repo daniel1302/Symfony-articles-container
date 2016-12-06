@@ -1,0 +1,53 @@
+AppBundle\Entity\Account:
+    group_sequence: 
+#        - Default
+#        - Strict
+   
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: email
+            errorPath: email
+            message: "Email jest już w użyciu, jeśli chcesz się zalogować a nie pamiętasz hasła to skorzystaj z opcji przypomnienia hasła na adres email"
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: username
+            errorPath: username
+            message: "Wybrany przez Ciebie nazwa użytkownika jest już zajęta"
+        
+    properties: 
+        username: 
+            - Length:
+                min: 5
+                max: 50
+                minMessage: "Twój login musi posiadać przynajmniej {{ limit }} znaków"
+                maxMessage: "Twój login może posiadać co najwyżej {{ limit }} znaków"
+                
+        plainPassword: 
+            - Length:
+                min: 8
+                max: 50
+                minMessage: "Twoje hasło musi posiadać przynajmniej {{ limit }} znaków"
+                maxMessage: "Twoje hasło może posiadać co najwyżej {{ limit }} znaków"
+                groups: [Strict]                
+            - Regex:
+                pattern: '/\d+/'
+                message: "Twoje hasło musi zawierać przynajmniej jedną cyfrę"
+                groups: [Strict]
+        
+        email: 
+            - Email:
+                message: "Adres e-mail, który podałeś przy rejestracji jest niepoprawny"
+                
+        firstname: 
+            - Length:
+                min: 2
+                max: 50
+                minMessage: Podaj imię odpowiedniej długości
+                maxMessage: Podaj imię odpowiedniej długości
+                
+        surname: 
+            - Length:
+                min: 2
+                max: 50
+                minMessage: Podaj nazwisko odpowiedniej długości
+                maxMessage: Podaj nazwisko odpowiedniej długości
+            

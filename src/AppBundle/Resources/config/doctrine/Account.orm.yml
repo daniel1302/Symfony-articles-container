@@ -1,0 +1,82 @@
+AppBundle\Entity\Account:
+    type: entity
+    table: account
+    indexes:
+        id_address:
+            columns:
+                - id_address
+    uniqueConstraints:
+        username:
+            columns:
+                - username
+        email:
+            columns:
+                - email
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        username:
+            type: string
+            nullable: false
+            length: 25
+            options:
+                fixed: false
+        pass:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        email:
+            type: string
+            nullable: false
+            length: 60
+            options:
+                fixed: false                
+        role:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+                default: ''
+        salt:
+            type: string
+            nullable: false
+            length: 32
+            options:
+                fixed: false
+                default: ''                
+        firstname:
+            type: string
+            nullable: false
+            length: 60
+            options:
+                fixed: false
+                default: ''                
+        surname:
+            type: string
+            nullable: false
+            length: 60
+            options:
+                fixed: false
+                default: ''
+    manyToOne:
+        address:
+            targetEntity: Address
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_address:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

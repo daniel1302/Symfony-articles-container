@@ -1,3 +1,7 @@
+app:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix:   /
+
 course:
     resource: "@CourseBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /course

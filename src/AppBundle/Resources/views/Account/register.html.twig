@@ -1,0 +1,135 @@
+{% extends "AppBundle:Layout:layout.html.twig" %}
+
+{% block stylesheetss %}
+    {{ parent() }}
+    
+    
+{% endblock %}
+
+{% block content %}
+    
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div id="legend">
+                <legend class="">Rejestracja</legend>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="span12 col-sm-6 col-sm-offset-3">
+            {{ form_start(form) }}
+            
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div>
+                        błędy:
+                        {{ form_errors(form) }}
+                        {{ form_errors(form.firstname) }}
+                        {{ form_errors(form.surname) }}
+                        {{ form_errors(form.username) }}
+                        {{ form_errors(form.email) }}
+                        {{ form_errors(form.address) }}
+                        {{ form_errors(form.plainPassword.first) }}
+                        {{ form_errors(form.address.street) }}
+                        {{ form_errors(form.address.postcode) }}
+                        {{ form_errors(form.address.voivodeship) }}
+                    </div>
+                </div>                
+            </div>
+                
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        {{ form_widget(form.firstname) }}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        {{ form_widget(form.surname) }}
+                    </div>
+                </div>
+            </div>
+                    
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        {{ form_widget(form.username) }}
+                    </div>
+                </div>                
+            </div>
+                    
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        {{ form_widget(form.email) }}
+                    </div>
+                </div>                
+            </div>
+                    
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        {{ form_widget(form.plainPassword.first) }}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        {{ form_widget(form.plainPassword.second) }}
+                    </div>
+                </div>
+            </div>
+                    
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    Adres
+                </div>                
+            </div>    
+                    
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        {{ form_widget(form.address.street) }}
+                    </div>
+                </div>                
+            </div>
+            
+            <div class="row">
+                <div class="col-xs-4 col-sm-3 col-md-3">
+                    <div class="form-group">
+                        {{ form_widget(form.address.postcode) }}
+                    </div>
+                </div>
+                <div class="col-xs-8 col-sm-9 col-md-9">
+                    <div class="form-group">
+                        {{ form_widget(form.address.city) }}
+                    </div>
+                </div>
+            </div>
+                    
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        {{ form_widget(form.address.voivodeship) }}
+                    </div>
+                </div>                
+            </div>
+                    
+            <div class="row">
+                <div class="col-xs-4 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        
+                    </div>
+                </div>
+                <div class="col-xs-8 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        {{ form_widget(form.submit, { attr: { 'class': 'form-control btn btn-primary' }, 'label': 'Zarejestruj się' } ) }}
+                    </div>
+                </div>
+            </div>
+            
+            {{ form_end(form) }}
+        </div>
+    </div>
+    
+{% endblock %}

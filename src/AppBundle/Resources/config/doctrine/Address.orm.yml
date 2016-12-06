@@ -1,0 +1,40 @@
+AppBundle\Entity\Address:
+    type: entity
+    table: address
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        street:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+                default: ''
+        postcode:
+            type: string
+            nullable: true
+            length: 6
+            options:
+                fixed: false
+                default: 00-000
+        city:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+                default: ''
+        voivodeship:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+    lifecycleCallbacks: {  }

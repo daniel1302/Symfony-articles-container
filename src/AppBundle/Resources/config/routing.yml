@@ -1,0 +1,8 @@
+app_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+
+account_group:
+    resource: "@AppBundle/Resources/config/routing/account.yml"
+    prefix:     /
+    
