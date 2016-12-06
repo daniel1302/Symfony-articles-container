@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Tests list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Description</th>
+                <th>Start</th>
+                <th>Created</th>
+                <th>Active</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for test in tests %}
+            <tr>
+                <td><a href="{{ path('admin_test_show', { 'id': test.id }) }}">{{ test.id }}</a></td>
+                <td>{{ test.name }}</td>
+                <td>{{ test.slug }}</td>
+                <td>{{ test.description }}</td>
+                <td>{% if test.start %}{{ test.start|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if test.created %}{{ test.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if test.active %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_test_show', { 'id': test.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_test_edit', { 'id': test.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_test_new') }}">Create a new test</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,62 @@
+AppBundle\Entity\Test:
+    type: entity
+    table: test
+    indexes:
+        fk_test_account_idx:
+            columns:
+                - id_author
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        slug:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        description:
+            type: string
+            nullable: false
+            length: 1000
+            options:
+                fixed: false
+        start:
+            type: datetime
+            nullable: false
+            options:
+                default: CURRENT_TIMESTAMP
+        created:
+            type: datetime
+            nullable: false
+            options:
+                default: CURRENT_TIMESTAMP
+        active:
+            type: boolean
+            nullable: false
+            options:
+                default: '1'
+    manyToOne:
+        idAuthor:
+            targetEntity: Account
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_author:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

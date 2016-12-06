@@ -18,3 +18,4 @@
 /.gitignore.swp
 /composer.lock
 /nbproject
+/dev-repo/*.bak
