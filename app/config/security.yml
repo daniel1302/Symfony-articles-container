@@ -15,8 +15,7 @@ security:
                 class: AppBundle:Account
                 property: username
                     
-    encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+    encoders:       
         AppBundle\Entity\Account: 
             algorithm: bcrypt
             cost: 12

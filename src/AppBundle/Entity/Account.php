@@ -192,9 +192,9 @@ namespace AppBundle\Entity;
      *
      * @return User
      */
-    public function setRoles($roles): self
+    public function setRole($role): self
     {
-        $this->roles = json_encode($roles);
+        $this->role = json_encode($role);
 
         return $this;
     }
@@ -204,14 +204,13 @@ namespace AppBundle\Entity;
      *
      * @return string
      */
-    public function getRoles(): array
+    public function getRole(): array
     {   
-        $roles = json_decode($this->roles, true);
-        
-        if (!is_array($roles)) {
-            return [];
+        $role = json_decode($this->role, true);
+        if (!is_array($role)) {
+            return ['ROLE_ADMIN'];
         }
-        return $roles;
+        return $role;
     }
 
     public function getSalt(): string {
@@ -260,7 +259,7 @@ namespace AppBundle\Entity;
         return serialize(array(
             $this->id,
             $this->username,
-            $this->password,
+            $this->pass,
             // see section on salt below
             // $this->salt,
         ));
@@ -272,38 +271,23 @@ namespace AppBundle\Entity;
         list (
             $this->id,
             $this->username,
-            $this->password,
+            $this->pass,
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized);
     }
     
-    /**
-     * Set role
-     *
-     * @param string $role
-     *
-     * @return Account
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
-    /**
-     * Get role
-     *
-     * @return string
-     */
-    public function getRole()
-    {
-        return $this->role;
+    public function getRoles() {
+        
+        return $this->getRole();
     }
 
     public function getPassword(): string {
         return $this->pass;
     }
-
+    
+    
+    public function __toString() {
+        return $this->username;
+    }
 }
