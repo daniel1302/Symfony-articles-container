@@ -37,7 +37,7 @@ class AccountController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             
             $passwordEncoder = $this->get('security.password_encoder');
-            $password = $passwordEncoder->encodePassword($accountEntity, $accountEntity->gePlainPassword());
+            $password = $passwordEncoder->encodePassword($accountEntity, $accountEntity->getPlainPassword());
             $accountEntity->setPass($password);
             
             $em->persist($accountEntity->getAddress());

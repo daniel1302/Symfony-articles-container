@@ -39,11 +39,6 @@ namespace AppBundle\Entity;
      * @var string
      */
     private $role = '';
-
-    /**
-     * @var string
-     */
-    private $salt = '';
     
     /**
      * @var string
@@ -218,16 +213,9 @@ namespace AppBundle\Entity;
         }
         return $roles;
     }
-    
-    public function setSalt(string $salt): self 
-    {
-        $this->salt = $salt;
-        
-        return $this;
-    }
-    
+
     public function getSalt(): string {
-        return $this->salt;
+        return '';
     }
     
     public function setFirstname(string $firstname): self 

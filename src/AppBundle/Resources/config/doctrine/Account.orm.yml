@@ -46,14 +46,7 @@ AppBundle\Entity\Account:
             length: 255
             options:
                 fixed: false
-                default: ''
-        salt:
-            type: string
-            nullable: false
-            length: 32
-            options:
-                fixed: false
-                default: ''                
+                default: ''               
         firstname:
             type: string
             nullable: false
