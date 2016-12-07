@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Admin;
 
 use AppBundle\Entity\Test;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -22,7 +22,7 @@ class TestController extends Controller
 
         $tests = $em->getRepository('AppBundle:Test')->findAll();
 
-        return $this->render('test/index.html.twig', array(
+        return $this->render('AppBundle:Admin/Test:index.html.twig', array(
             'tests' => $tests,
         ));
     }
@@ -45,7 +45,7 @@ class TestController extends Controller
             return $this->redirectToRoute('admin_test_show', array('id' => $test->getId()));
         }
 
-        return $this->render('test/new.html.twig', array(
+        return $this->render('AppBundle:Admin/Test:new.html.twig', array(
             'test' => $test,
             'form' => $form->createView(),
         ));
@@ -59,7 +59,7 @@ class TestController extends Controller
     {
         $deleteForm = $this->createDeleteForm($test);
 
-        return $this->render('test/show.html.twig', array(
+        return $this->render('AppBundle:Admin:Test/show.html.twig', array(
             'test' => $test,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -81,7 +81,7 @@ class TestController extends Controller
             return $this->redirectToRoute('admin_test_edit', array('id' => $test->getId()));
         }
 
-        return $this->render('test/edit.html.twig', array(
+        return $this->render('AppBundle:Admin:Test/edit.html.twig', array(
             'test' => $test,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
