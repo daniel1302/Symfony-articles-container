@@ -1,6 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends "AppBundle:Layout:admin.html.twig" %}
 
-{% block body %}
+
+{% block contentTitle %}Podgląd testu{% endblock %}
+
+{% block content %}
     <h1>Test</h1>
 
     <table>
@@ -37,16 +40,22 @@
     </table>
 
     <ul>
+
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
+
+{% block contentFooter %}
+    <ul>
         <li>
             <a href="{{ path('admin_test_index') }}">Back to the list</a>
         </li>
         <li>
             <a href="{{ path('admin_test_edit', { 'id': test.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
         </li>
     </ul>
 {% endblock %}

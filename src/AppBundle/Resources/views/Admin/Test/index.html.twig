@@ -1,20 +1,20 @@
-{% extends 'base.html.twig' %}
+{% extends "AppBundle:Layout:admin.html.twig" %}
 
-{% block body %}
-    <h1>Tests list</h1>
+{% block contentTitle %}Lista testów{% endblock %}
+{% block content %}
 
     <table>
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Slug</th>
-                <th>Description</th>
-                <th>Start</th>
-                <th>Created</th>
-                <th>Active</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Slug</th>
+            <th>Description</th>
+            <th>Start</th>
+            <th>Created</th>
+            <th>Active</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for test in tests %}

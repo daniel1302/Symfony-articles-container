@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Admin;
 
 use AppBundle\Entity\Test;
+use AppBundle\Utils\Slugger;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -38,6 +39,11 @@ class TestController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $test->setSlug(Slugger::slugify($test->getName()));
+            $test->setActive(1);
+            $test->setAuthor($this->getUser());
+            $test->setCreated(new \DateTime('now'));
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($test);
             $em->flush($test);
@@ -76,6 +82,7 @@ class TestController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $test->setSlug(Slugger::slugify($test->getName()));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('admin_test_edit', array('id' => $test->getId()));

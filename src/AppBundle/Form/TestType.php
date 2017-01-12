@@ -3,6 +3,8 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +15,13 @@ class TestType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('slug')->add('description')->add('start')->add('created')->add('active')->add('idAuthor')        ;
+        $builder->add('name', TextType::class, [
+                'label' => 'Nazwa'
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Opis'
+            ])
+            ->add('start');
     }
     
     /**

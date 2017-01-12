@@ -45,7 +45,7 @@ class Test
     /**
      * @var \AppBundle\Entity\Account
      */
-    private $idAuthor;
+    private $author;
     
     
     public function __construct() {
@@ -214,9 +214,9 @@ class Test
      *
      * @return Test
      */
-    public function setIdAuthor(\AppBundle\Entity\Account $idAuthor = null)
+    public function setAuthor(\AppBundle\Entity\Account $idAuthor = null)
     {
-        $this->idAuthor = $idAuthor;
+        $this->author = $idAuthor;
 
         return $this;
     }
@@ -226,8 +226,8 @@ class Test
      *
      * @return \AppBundle\Entity\Account
      */
-    public function getIdAuthor()
+    public function getAuthor()
     {
-        return $this->idAuthor;
+        return $this->author;
     }
 }

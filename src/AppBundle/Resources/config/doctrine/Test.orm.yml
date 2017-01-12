@@ -49,7 +49,7 @@ AppBundle\Entity\Test:
             options:
                 default: '1'
     manyToOne:
-        idAuthor:
+        author:
             targetEntity: Account
             cascade: {  }
             fetch: LAZY
