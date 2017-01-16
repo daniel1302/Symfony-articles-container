@@ -30,7 +30,9 @@
         "incenteev/composer-parameter-handler": "^2.0",
 	    "almasaeed2010/adminlte": "^2.3",
         "twbs/bootstrap": "^3.3",
-        "components/jquery": "^3.1"
+        "components/jquery": "^3.1",
+        "datatables/datatables": "^1.10",
+        "components/jqueryui": "^1.12"
 
     },
     "require-dev": {

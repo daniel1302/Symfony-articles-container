@@ -1,0 +1,11 @@
+AppBundle\Entity\Question:    
+    properties:
+        content:
+            - Regex:
+                pattern: '/^a$/'
+                message: "Treść pytania jest za krótka"
+
+        score: 
+            - Regex:
+                pattern: '/^(/d+)$/'
+                message: "Punkty muszą być liczbą"

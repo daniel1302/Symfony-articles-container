@@ -6,6 +6,8 @@ use AppBundle\Entity\Test;
 use AppBundle\Utils\Slugger;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use AppBundle\Entity\Question;
 
 /**
  * Test controller.
@@ -64,11 +66,36 @@ class TestController extends Controller
     public function showAction(Test $test)
     {
         $deleteForm = $this->createDeleteForm($test);
-
+        $repositoryQuestion = $this->getDoctrine()->getRepository(Question::class);
+        
+        
+        
+        
         return $this->render('AppBundle:Admin:Test/show.html.twig', array(
-            'test' => $test,
-            'delete_form' => $deleteForm->createView(),
+            'test'          => $test,
+            'questions'     => $repositoryQuestion->getSortedForTest($test),
+            'delete_form'   => $deleteForm->createView(),
         ));
+    }
+    
+    public function sortAction(Request $request, Test $test)
+    {
+        $order = $request->request->get('order');
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $questions = $em->getRepository(Question::class)->findByTest($test);
+        
+        foreach ($questions as $question) {
+            $key = (int)array_search($question->getId(), $order);
+            
+            $question->setOrderNo($key);
+            $em->persist($question);
+        }
+        
+        $em->flush();
+        
+        return new JsonResponse(['status' => 200, 'message' => 'OK']);
     }
 
     /**

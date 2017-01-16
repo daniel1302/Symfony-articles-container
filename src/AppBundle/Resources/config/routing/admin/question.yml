@@ -1,0 +1,15 @@
+
+admin_question_new:
+    path:     /{id}/new
+    defaults: { _controller: "AppBundle:Admin/Question:new" }
+    methods:  [GET, POST]
+
+admin_question_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Admin/Question:edit" }
+    methods:  [GET, POST]
+
+admin_question_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Admin/Question:delete" }
+    methods:  DELETE

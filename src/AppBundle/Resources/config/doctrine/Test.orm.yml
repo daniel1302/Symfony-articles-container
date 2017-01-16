@@ -1,6 +1,7 @@
 AppBundle\Entity\Test:
     type: entity
     table: test
+    repositoryClass: AppBundle\Repository\TestRepository
     indexes:
         fk_test_account_idx:
             columns:
@@ -59,4 +60,10 @@ AppBundle\Entity\Test:
                 id_author:
                     referencedColumnName: id
             orphanRemoval: false
+            
+    oneToMany:
+        questions:
+            targetEntity: Question
+            mappedBy: test
+    
     lifecycleCallbacks: {  }

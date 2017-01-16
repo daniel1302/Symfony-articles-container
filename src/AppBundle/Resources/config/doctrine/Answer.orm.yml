@@ -1,0 +1,36 @@
+AppBundle\Entity\Answer:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\AnswerRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        content:
+            type: string
+            length: '1024'
+        idQuestion:
+            type: integer
+            column: id_question
+        valid:
+            type: boolean
+        idAuthor:
+            type: integer
+            column: id_author
+            
+    manyToOne:
+        author:
+            targetEntity: Account
+            joinColumn: 
+                id_author:
+                    referencedColumnName: id
+        question:
+            targetEntity: Question
+            inversedBy: answers
+            joinColumn:
+                name: id_question
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

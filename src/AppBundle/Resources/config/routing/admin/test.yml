@@ -17,6 +17,11 @@ admin_test_edit:
     path:     /{id}/edit
     defaults: { _controller: "AppBundle:Admin/Test:edit" }
     methods:  [GET, POST]
+    
+admin_test_sort_questions:
+    path:     /{id}/sort
+    defaults: { _controller: "AppBundle:Admin/Test:sort" }
+    methods:  [POST]
 
 admin_test_delete:
     path:     /{id}/delete

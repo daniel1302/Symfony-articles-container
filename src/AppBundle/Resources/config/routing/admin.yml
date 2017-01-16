@@ -1,3 +1,7 @@
 admin_test_group:
     resource: "@AppBundle/Resources/config/routing/admin/test.yml"
     prefix:     /test
+    
+admin_question_group:
+    resource: "@AppBundle/Resources/config/routing/admin/question.yml"
+    prefix:     /pytania

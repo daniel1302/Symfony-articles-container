@@ -1,0 +1,21 @@
+{% extends "AppBundle:Layout:admin.html.twig" %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+
+{% block contentTitle %}Dodaj pytanie{% endblock %}
+
+{% block content %}
+
+    <h1>Question creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+           <a href="{{ path('admin_test_show', {id: test.id} ) }}">powrót do testu</a>
+        </li>
+    </ul>
+{% endblock %}

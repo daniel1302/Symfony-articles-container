@@ -230,4 +230,47 @@ class Test
     {
         return $this->author;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $questions;
+
+
+    /**
+     * Add question
+     *
+     * @param \AppBundle\Entity\Question $question
+     *
+     * @return Test
+     */
+    public function addQuestion(\AppBundle\Entity\Question $question)
+    {
+        $this->questions[] = $question;
+
+        return $this;
+    }
+
+    /**
+     * Remove question
+     *
+     * @param \AppBundle\Entity\Question $question
+     */
+    public function removeQuestion(\AppBundle\Entity\Question $question)
+    {
+        $this->questions->removeElement($question);
+    }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+    
+    public function __toString() {
+        return $this->name;
+    }
 }
