@@ -6,6 +6,10 @@ account_group:
     resource: "@AppBundle/Resources/config/routing/account.yml"
     prefix:     /
     
+test_group:
+    resource: "@AppBundle/Resources/config/routing/test.yml"
+    prefix:     /test
+    
 admin_group:
     resource: "@AppBundle/Resources/config/routing/admin.yml"
     prefix:     /admin

@@ -1,0 +1,11 @@
+test_index:
+    path:     /
+    defaults: { _controller: AppBundle:Test:index }
+    
+test_start:
+    path:     /rozpocznij/{slug}
+    defaults: { _controller: AppBundle:Test:start }
+    
+test_question:
+    path:     /rozpocznij/{slug}/pytanie/{questionNo}
+    defaults: { _controller: AppBundle:Test:question,  questionNo: 1 }

@@ -4,4 +4,8 @@ admin_test_group:
     
 admin_question_group:
     resource: "@AppBundle/Resources/config/routing/admin/question.yml"
-    prefix:     /pytania
+    prefix:     /pytanie
+    
+admin_answer_group:
+    resource: "@AppBundle/Resources/config/routing/admin/answer.yml"
+    prefix:     /odpowiedz

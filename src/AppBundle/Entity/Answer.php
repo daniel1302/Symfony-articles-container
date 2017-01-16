@@ -28,11 +28,6 @@ class Answer
     private $valid;
 
     /**
-     * @var integer
-     */
-    private $idAuthor;
-
-    /**
      * @var \AppBundle\Entity\Account
      */
     private $author;
@@ -41,7 +36,11 @@ class Answer
      * @var \AppBundle\Entity\Question
      */
     private $question;
-
+    
+    /**
+     * @var integer
+     */
+    private $orderNo;
 
     /**
      * Get id
@@ -125,29 +124,6 @@ class Answer
         return $this->valid;
     }
 
-    /**
-     * Set idAuthor
-     *
-     * @param integer $idAuthor
-     *
-     * @return Answer
-     */
-    public function setIdAuthor($idAuthor)
-    {
-        $this->idAuthor = $idAuthor;
-
-        return $this;
-    }
-
-    /**
-     * Get idAuthor
-     *
-     * @return integer
-     */
-    public function getIdAuthor()
-    {
-        return $this->idAuthor;
-    }
 
     /**
      * Set author
@@ -195,6 +171,18 @@ class Answer
     public function getQuestion()
     {
         return $this->question;
+    }
+    
+    public function setOrderNo($orderNo = null)
+    {
+        $this->orderNo = $orderNo;
+
+        return $this;
+    }
+
+    public function getOrderNo()
+    {
+        return $this->orderNo;
     }
 }
 

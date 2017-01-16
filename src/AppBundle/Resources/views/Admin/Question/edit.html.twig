@@ -2,25 +2,102 @@
 {% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
 
 
-{% block contentTitle %}Edytuj pytanie{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+        #sortable li { display: block; margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1em;  cursor: pointer; }
+        #sortable li span { position: absolute; margin-left: -1.3em; }
+    </style>
+{% endblock %}
 
-{% block content %}
+{% block javascripts %}
+    {{parent() }}
+    <script type="text/javascript">
+        $( function() {
+            $( "#sortable" ).sortable({
+                    beforeStop: function( event, ui ) {
+                        var order = jQuery(this).sortable('toArray', { attribute: 'data-order'});
+                        jQuery.ajax({
+                            url: '{{ path('admin_question_sort_answers', { id: test.id }) }}',
+                            type: 'POST',
+                            data: {
+                                order: order
+                            }
+                        })
+                        
+                        console.log();
+                    }
+                });
+            $( "#sortable" ).disableSelection();
+        } );
+    </script>
+{% endblock %}
 
-    <h1>Question edit</h1>
+{% block mainContent %}
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Podgląd testu</h3>
+        </div>
+        <div class="box-body">
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+            <h1>Question edit</h1>
 
-    <ul>
-        <li>
-           { <a href="{{ path('admin_test_show', {id: question.test.id}) }}">Back to the list</a>}
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            {{ form_start(edit_form) }}
+                {{ form_widget(edit_form) }}
+                <input type="submit" value="Edit" />
+            {{ form_end(edit_form) }}
+
+            <ul>
+                
+            </ul>
+                    
+                    
+       </div>
+        <div class="box-footer">
+
+            <ul>
+                <li>
+                    <a href="{{ path('admin_test_show', {id: test.id}) }}">Back to the list</a>
+                </li>
+                <li>
+                   { <a href="{{ path('admin_test_show', {id: question.test.id}) }}">Back to the list</a>}
+                </li>
+                <li>
+                    {{ form_start(delete_form) }}
+                        <input type="submit" value="Delete">
+                    {{ form_end(delete_form) }}
+                </li>
+                
+                <li>
+                    <a href="{{ path('admin_answer_new', { 'id': question.id }) }}">Dodaj odpowiedź</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+                
+    <div class="box box-warning">
+        <div class="box-header with-border">
+            <h3 class="box-title">Pytania zawarte w teście</h3>
+        </div>
+        <div class="box-body">
+            
+            <ul id="sortable">
+                
+                {% for answer in answers %}
+                    
+                    <li class="ui-state-default" data-order="{{ answer.id }}">
+                        <a href="{{ path('admin_answer_edit', { id: answer.id} ) }}">
+                            <span class="ui-icon ui-icon-arrowthick-2-n-s"></span> 
+                            {{ answer.content }}
+                        </a>
+                    </li>
+                    
+                {% endfor %}
+            </ul>
+            
+        </div>
+    </div>             
+                    
 {% endblock %}

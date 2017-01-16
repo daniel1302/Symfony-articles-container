@@ -5,8 +5,8 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-class QuestionType extends AbstractType
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+class AnswerType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -14,7 +14,12 @@ class QuestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('content')
-                ->add('score');
+                ->add('valid', ChoiceType::class, [
+                    'choices' => [
+                        'Yes' => true,
+                        'No'  => false,
+                    ]
+                ]);
     }
     
     /**
@@ -23,7 +28,7 @@ class QuestionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Question'
+            'data_class' => 'AppBundle\Entity\Answer'
         ));
     }
 
@@ -34,7 +39,6 @@ class QuestionType extends AbstractType
     {
         return 'appbundle_question';
     }
-    
 
-    
+
 }

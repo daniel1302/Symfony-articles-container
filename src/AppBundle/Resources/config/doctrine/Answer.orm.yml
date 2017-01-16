@@ -1,6 +1,6 @@
 AppBundle\Entity\Answer:
     type: entity
-    table: null
+    table: answer
     repositoryClass: AppBundle\Repository\AnswerRepository
     id:
         id:
@@ -11,22 +11,19 @@ AppBundle\Entity\Answer:
     fields:
         content:
             type: string
-            length: '1024'
-        idQuestion:
-            type: integer
-            column: id_question
+            length: '1024'     
         valid:
             type: boolean
-        idAuthor:
+        orderNo:
             type: integer
-            column: id_author
+            column: order_no
             
     manyToOne:
         author:
             targetEntity: Account
             joinColumn: 
-                id_author:
-                    referencedColumnName: id
+                name: id_author
+                referencedColumnName: id
         question:
             targetEntity: Question
             inversedBy: answers

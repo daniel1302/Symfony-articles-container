@@ -13,3 +13,8 @@ admin_question_delete:
     path:     /{id}/delete
     defaults: { _controller: "AppBundle:Admin/Question:delete" }
     methods:  DELETE
+
+admin_question_sort_answers:
+    path:     /{id}/sort
+    defaults: { _controller: "AppBundle:Admin/Question:sort" }
+    methods:  [POST]

@@ -1,0 +1,47 @@
+{% extends "AppBundle:Layout:layout.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    
+    <style type="text/css">
+        
+        .bs-callout {
+            -moz-border-bottom-colors: none;
+            -moz-border-left-colors: none;
+            -moz-border-right-colors: none;
+            -moz-border-top-colors: none;
+            border-color: #eee;
+            border-image: none;
+            border-radius: 3px;
+            border-style: solid;
+            border-width: 1px 1px 1px 5px;
+            margin: 20px 0;
+            padding: 20px;
+        }
+        .bs-callout-danger {
+             border-left-color: #ce4844;
+        }
+    </style>
+    
+{% endblock %}
+
+{% block content %}
+    
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div id="legend">
+                <legend class="">Lista testów</legend>
+            </div>
+        </div>
+    </div>
+    
+    {% for test in tests %}
+        <div class="bs-callout bs-callout-danger"> 
+            <h4> {{ test.name }}</h4> 
+            <p>{{ test.description }}</p> 
+            <p>
+                <a class="btn btn-primary" href="{{ path('test_start', { slug: test.slug }) }}" role="button">Rozpocznij test</a>
+            </p>
+        </div>
+    {% endfor %}
+{% endblock %}

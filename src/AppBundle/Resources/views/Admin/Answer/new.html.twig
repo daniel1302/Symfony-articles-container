@@ -2,11 +2,11 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 
-{% block contentTitle %}Dodaj pytanie{% endblock %}
+{% block contentTitle %}Dodaj odpowiedz{% endblock %}
 
 {% block content %}
 
-    <h1>Question creation</h1>
+    <h1>Answer creation</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -15,7 +15,7 @@
 
     <ul>
         <li>
-           <a href="{{ path('admin_test_show', { id: test.id } ) }}">powrót do testu</a>
+           <a href="{{ path('admin_question_edit', {id: question.id} ) }}">powrót do pytania</a>
         </li>
     </ul>
 {% endblock %}

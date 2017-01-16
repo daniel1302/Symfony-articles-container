@@ -4,9 +4,10 @@ namespace AppBundle\Controller\Admin;
 
 use AppBundle\Entity\Question;
 use AppBundle\Entity\Test;
+use AppBundle\Entity\Answer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 /**
  * Question controller.
  *
@@ -53,18 +54,41 @@ class QuestionController extends Controller
         $deleteForm = $this->createDeleteForm($question);
         $editForm = $this->createForm('AppBundle\Form\QuestionType', $question);
         $editForm->handleRequest($request);
-
+        $em = $this->getDoctrine()->getManager();
+        
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
 
             return $this->redirectToRoute('admin_question_edit', array('id' => $question->getId()));
         }
 
         return $this->render('AppBundle:Admin/Question:edit.html.twig', array(
-            'question' => $question,
-            'edit_form' => $editForm->createView(),
+            'question'    => $question,
+            'test'        => $question->getTest(),
+            'answers'     => $em->getRepository(Answer::class)->getSortedForQuestion($question),
+            'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+    
+    public function sortAction(Request $request, Question $question)
+    {
+        $order = $request->request->get('order');
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $answers = $em->getRepository(Answer::class)->findByQuestion($question);
+        
+        
+        foreach ($answers as $answer) {
+            $key = (int)array_search($answer->getId(), $order);
+            $answer->setOrderNo($key);
+            $em->persist($answer);
+        }
+        
+        $em->flush();
+        
+        return new JsonResponse(['status' => 200, 'message' => 'OK']);
     }
 
     /**

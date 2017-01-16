@@ -1,6 +1,6 @@
 AppBundle\Entity\Question:
     type: entity
-    table: null
+    table: question
     repositoryClass: AppBundle\Repository\QuestionRepository
     id:
         id:
@@ -24,8 +24,8 @@ AppBundle\Entity\Question:
         author:
             targetEntity: Account
             joinColumn: 
-                id_author:
-                    referencedColumnName: id
+                name: id_author
+                referencedColumnName: id
         
         test:
             targetEntity: Test

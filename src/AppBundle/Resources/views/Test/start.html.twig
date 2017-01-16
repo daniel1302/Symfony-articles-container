@@ -1,0 +1,37 @@
+{% extends "AppBundle:Layout:layout.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    
+    
+{% endblock %}
+
+{% block content %}
+    
+  
+        
+    <div id="legend">
+        <legend class="">
+            Lista pytań dla testu: <small>{{ test.name }}</small>
+        
+        </legend>
+    </div>
+            <a href="{{ path('test_index') }}">... powrót do listy testów</a><br><br>
+    
+    <ul class="list-group">
+        {% for question in test.questions %}
+        <li class="list-group-item">
+            <span class="badge">{{ question.score }} pkt.</span>
+            {{ question.content }}
+        </li>
+        {% else %}
+            <li class="list-group-item">
+                W teście niema pytań
+            </li>
+        {% endfor %}
+    </ul>
+        
+    <div style="text-align: center">
+        <a class="btn btn-primary" href="{{ path('test_question', { slug: test.slug }) }}" role="button">Rozpocznij test</a>
+    </div>
+{% endblock %}

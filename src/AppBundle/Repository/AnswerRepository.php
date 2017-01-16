@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Repository;
+use AppBundle\Entity\Question;
 
 /**
  * AnswerRepository
@@ -10,4 +11,17 @@ namespace AppBundle\Repository;
  */
 class AnswerRepository extends \Doctrine\ORM\EntityRepository
 {
+    public static $alias = 'ans';
+    
+    public function getSortedForQuestion(Question $question) {
+        $query = $this->createQueryBuilder(self::$alias)
+                ->orderBy(self::$alias.'.orderNo')
+                ->where(self::$alias.'.question=:question')
+                ->setParameter('question', $question);
+        
+        $results = $query->getQuery()
+                ->getResult();
+        
+        return $results;
+    }
 }
