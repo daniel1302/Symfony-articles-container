@@ -185,4 +185,3 @@ class Answer
         return $this->orderNo;
     }
 }
-

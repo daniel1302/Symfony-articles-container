@@ -22,8 +22,6 @@ class TestController extends Controller
     {
         $em = $this->getDoctrine();
         
-        
-        
         return $this->render('AppBundle:Test:start.html.twig', [
             'test'  => $test
         ]);
@@ -36,8 +34,7 @@ class TestController extends Controller
         $repositoryQuestion = $em->getRepository(Question::class);
         
         $question = $repositoryQuestion->getQuestionForTest($test, $questionNo);
-        var_dump($question); die();
-        
+                
         
         return $this->render('AppBundle:Test:start.html.twig', [
             'test'  => $test

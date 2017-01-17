@@ -1,1 +1,22 @@
-<body>Hello World!</body>
+{% extends "AppBundle:Layout:layout.html.twig" %}
+
+{% block stylesheetss %}
+    {{ parent() }}
+    
+    
+{% endblock %}
+
+{% block content %}
+    
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div id="legend">
+                <legend class="">Strona główna</legend>
+            </div>
+        </div>
+    </div>
+    
+    <div>
+    </div>
+    
+{% endblock %}

@@ -29,6 +29,7 @@ class AnswerController extends Controller
             
             $answer->setAuthor($this->getUser());
             $answer->setQuestion($question);
+            $answer->setOrderNo(1);
             
             $em->persist($answer);
             $em->flush($answer);

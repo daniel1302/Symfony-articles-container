@@ -9,3 +9,7 @@ admin_question_group:
 admin_answer_group:
     resource: "@AppBundle/Resources/config/routing/admin/answer.yml"
     prefix:     /odpowiedz
+    
+admin_index_group:
+    resource: "@AppBundle/Resources/config/routing/admin/admin.yml"
+    prefix:     /

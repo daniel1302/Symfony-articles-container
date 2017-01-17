@@ -34,19 +34,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">nauczeCię.pl</a>
             </div>
             
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li>
+                            <a href="{{ path('account_register') }}">Zarejestruj się</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('account_login') }}">Zaloguj się</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="#">Edytuj profil</a>
+                        </li>
+                    {% endif %}
                     <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                        <a href="{{ path('test_index') }}">Testy</a>
                     </li>
                 </ul>
             </div>

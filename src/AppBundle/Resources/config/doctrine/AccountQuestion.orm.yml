@@ -1,0 +1,32 @@
+AppBundle\Entity\AccountQuestion:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\AccountQuestionRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        points:
+            type: integer
+            
+        fillDate:
+            type: date
+            column: fill_date
+        
+    
+    manyToOne:
+        account:
+            targetEntity: Account
+            joinColumn:
+                name: id_account
+                referencedColumnName: id
+        question:
+            targetEntity: Question
+            joinColumn:
+                name: id_question
+                referencedColumn: id
+        
+    lifecycleCallbacks: {  }
