@@ -10,8 +10,7 @@ AppBundle\Entity\AccountQuestion:
                 strategy: AUTO
     fields:
         points:
-            type: integer
-            
+            type: integer            
         fillDate:
             type: date
             column: fill_date

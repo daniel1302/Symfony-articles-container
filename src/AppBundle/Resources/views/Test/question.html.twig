@@ -1,0 +1,26 @@
+{% extends "AppBundle:Layout:layout.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    
+    
+{% endblock %}
+
+{% block content %}
+    <div id="legend">
+        <legend class="">
+            <small>{{ test.name }}</small>        
+        </legend>
+    </div>
+    
+        
+            {{ question.content }}<br>
+            
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        
+    <div style="text-align: center">
+        <a class="btn btn-primary" href="{{ path('test_question', { slug: test.slug }) }}" role="button">Rozpocznij test</a>
+    </div>
+{% endblock %}
