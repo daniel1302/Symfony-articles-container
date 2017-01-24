@@ -1,4 +1,5 @@
 {% extends "AppBundle:Layout:layout.html.twig" %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -14,13 +15,15 @@
     </div>
     
         
-            {{ question.content }}<br>
-            
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            {{ form_end(form) }}
+    {{ question.content }}<br>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+
         
-    <div style="text-align: center">
-        <a class="btn btn-primary" href="{{ path('test_question', { slug: test.slug }) }}" role="button">Rozpocznij test</a>
-    </div>
+        <div style="text-align: center">
+            <input type="submit" class="btn btn-primary" href="{{ path('test_question', { slug: test.slug, questionNo: questionNo }) }}" role="button" value="Kolejne pytanie">
+        </div>
+
+    {{ form_end(form) }}
 {% endblock %}

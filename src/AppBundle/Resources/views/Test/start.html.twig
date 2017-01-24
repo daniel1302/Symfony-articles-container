@@ -3,7 +3,7 @@
 {% block stylesheets %}
     {{ parent() }}
     
-    
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/pages/test.css') }}" />
 {% endblock %}
 
 {% block content %}
@@ -20,8 +20,21 @@
     
     <ul class="list-group">
         {% for question in test.questions %}
-        <li class="list-group-item">
-            <span class="badge">{{ question.score }} pkt.</span>
+            {% set validClass = '' %}
+            {% if points[question.id] is defined and points[question.id] == 0 %}
+                {% set validClass = 'invalid-answer' %}
+            {% elseif points[question.id] is defined and points[question.id] > 0 %}
+                {% set validClass = 'valid-answer' %}
+            {% endif %}
+
+
+        <li class="list-group-item {{ validClass }}">
+            <span class="badge">
+                {% if points[question.id] is defined %}
+                    {{- points[question.id]~'/' -}}
+                {% endif %}
+                {{- question.score }} pkt.
+            </span>
             {{ question.content }}
         </li>
         {% else %}

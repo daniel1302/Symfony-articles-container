@@ -7,5 +7,5 @@ test_start:
     defaults: { _controller: AppBundle:Test:start }
     
 test_question:
-    path:     /rozpocznij/{slug}/pytanie/{questionNo}
+    path:     /{slug}/pytanie/{questionNo}
     defaults: { _controller: AppBundle:Test:question,  questionNo: 1 }

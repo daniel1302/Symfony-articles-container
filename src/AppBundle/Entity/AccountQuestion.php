@@ -115,29 +115,7 @@ class AccountQuestion
         return $this->fillDate;
     }
 
-    /**
-     * Set answer
-     *
-     * @param string $answer
-     *
-     * @return AccountQuestion
-     */
-    public function setAnswer($answer)
-    {
-        $this->answer = $answer;
 
-        return $this;
-    }
-
-    /**
-     * Get answer
-     *
-     * @return string
-     */
-    public function getAnswer()
-    {
-        return $this->answer;
-    }
     /**
      * @var integer
      */
@@ -166,5 +144,13 @@ class AccountQuestion
     public function getPoints()
     {
         return $this->points;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getQuestionId()
+    {
+        return $this->getQuestion()->getId();
     }
 }

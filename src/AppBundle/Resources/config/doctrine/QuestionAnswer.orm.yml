@@ -1,0 +1,26 @@
+AppBundle\Entity\QuestionAnswer:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\QuestionAnswerRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields: ~
+
+    
+    manyToOne:
+        answer:
+            targetEntity: Answer
+            joinColumn:
+                name: id_answer
+                referencedColumnName: id
+        question:
+            targetEntity: AccountQuestion
+            joinColumn:
+                name: id_question
+                referencedColumn: id
+        
+    lifecycleCallbacks: {  }
