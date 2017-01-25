@@ -45,7 +45,7 @@
     </ul>
         
     <div style="text-align: center">
-        {% if test.questionos|length < points|length %}
+        {% if test.questions|length < points|length %}
             <a class="btn btn-primary" href="{{ path('test_question', { slug: test.slug }) }}" role="button">
                 {%  if points|length > 0 %}
                     Kontynuuj test
