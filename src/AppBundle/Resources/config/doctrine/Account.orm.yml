@@ -1,6 +1,7 @@
 AppBundle\Entity\Account:
     type: entity
     table: account
+    repositoryClass: AppBundle\Repository\AccountRepository
     indexes:
         id_address:
             columns:

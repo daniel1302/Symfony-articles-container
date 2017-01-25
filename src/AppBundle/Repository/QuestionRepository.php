@@ -32,7 +32,7 @@ class QuestionRepository extends \Doctrine\ORM\EntityRepository
                 ->orderBy(self::$alias.'.orderNo')
                 ->where(self::$alias.'.test=:test')
                 ->setParameter('test', $test)
-                ->setFirstResult($number)
+                ->setFirstResult($number-1)
                 ->setMaxResults(1);
         
         $result = $query->getQuery()

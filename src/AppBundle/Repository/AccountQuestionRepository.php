@@ -30,13 +30,16 @@ class AccountQuestionRepository extends \Doctrine\ORM\EntityRepository
         return true;
     }
 
-    public function getAnsweredForTest(Test $test, Account $account)
+    public function getAnsweredForTest(Test $test, Account $account = null)
     {
+        if ($account === null) {
+            return [];
+        }
         $query = $this->createQueryBuilder(self::$alias)
-            ->join(self::$alias.'.question', 'q')
+            ->join(self::$alias . '.question', 'q')
             ->join('q.test', 't')
             ->where('t=:test')
-            ->andWhere(self::$alias.'.account=:account')
+            ->andWhere(self::$alias . '.account=:account')
             ->setParameter('test', $test)
             ->setParameter('account', $account);
 
@@ -47,4 +50,6 @@ class AccountQuestionRepository extends \Doctrine\ORM\EntityRepository
 
         return $results;
     }
+
+
 }

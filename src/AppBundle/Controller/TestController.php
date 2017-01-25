@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Account;
 use AppBundle\Entity\AccountQuestion;
 use AppBundle\Entity\QuestionAnswer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -41,13 +42,21 @@ class TestController extends Controller
         }
 
         return $this->render('AppBundle:Test:start.html.twig', [
-            'test'      => $test,
-            'points'    => $points
+            'test' => $test,
+            'points' => $points
         ]);
     }
 
     public function questionAction(Request $request, Test $test, $questionNo)
     {
+        if (empty($this->getUser())) {
+            $request
+                ->getSession()
+                ->getFlashBag()
+                ->add('error', 'Żeby wypełnić test zaloguj się!');
+            return $this->redirectToRoute('test_start', ['slug' => $test->getSlug()]);
+        }
+
         $em = $this->getDoctrine()->getManager();
 
 
@@ -57,16 +66,28 @@ class TestController extends Controller
         $repositoryAnswer = $em->getRepository(Answer::class);
         $repositoryAccountQuestion = $em->getRepository(AccountQuestion::class);
         $question = $repositoryQuestion->getQuestionForTest($test, $questionNo);
+
+        if (empty($question)) {
+            return $this->redirectToRoute('test_start', ['slug' => $test->getSlug()]);
+        }
+
         $answers = $repositoryAnswer->getSortedForQuestion($question);
 
+
+
         if ($repositoryAccountQuestion->isAnswered($question, $this->getUser())) {
-            return $this->redirectToRoute('test_question', ['slug' => $test->getSlug(), 'questionNo' => $questionNo+1]);
+            return $this->redirectToRoute('test_question', ['slug' => $test->getSlug(), 'questionNo' => $questionNo + 1]);
         }
 
         $form = $this->createQuestionForm($answers);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+
+            if (is_array($data['answers'])) {
+                $data['answers'] = current($data['answers']);
+            }
+
             $selectedAnswer = $repositoryAnswer->find($data['answers']);
 
             if (empty($selectedAnswer) || $selectedAnswer->getQuestion()->getId() !== $question->getId()) {
@@ -95,7 +116,7 @@ class TestController extends Controller
             $em->persist($questionAnswerEntity);
 
             $em->flush();
-            return $this->redirectToRoute('test_question', ['slug' => $test->getSlug(), 'questionNo' => $questionNo+1]);
+            return $this->redirectToRoute('test_question', ['slug' => $test->getSlug(), 'questionNo' => $questionNo + 1]);
         }
 
         return $this->render('AppBundle:Test:question.html.twig', [
@@ -106,6 +127,21 @@ class TestController extends Controller
         ]);
     }
 
+    public function rankAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $repositoryAccount = $em->getRepository(Account::class);
+
+
+        $accounts = $repositoryAccount->getTestRank();
+
+        return $this->render('AppBundle:Test:rank.html.twig', [
+            'accounts' => $accounts,
+            'me' => $this->getUser()
+        ]);
+    }
+
 
     private function createQuestionForm(array $answers)
     {
@@ -113,8 +149,8 @@ class TestController extends Controller
         $form = $this->createFormBuilder();
         $form->setMethod('POST');
         $form->setAction($this->generateUrl('test_question', [
-            'slug'          => $this->test->getSlug(),
-            'questionNo'    => $this->questionNo
+            'slug' => $this->test->getSlug(),
+            'questionNo' => $this->questionNo
         ]));
 
 

@@ -9,3 +9,7 @@ test_start:
 test_question:
     path:     /{slug}/pytanie/{questionNo}
     defaults: { _controller: AppBundle:Test:question,  questionNo: 1 }
+
+test_rank:
+    path:     /ranking
+    defaults: { _controller: AppBundle:Test:rank,  questionNo: 1 }
