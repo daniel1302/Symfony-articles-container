@@ -2,6 +2,9 @@ app_homepage:
     path:     /
     defaults: { _controller: AppBundle:Default:index }
 
+logout:
+    path: /logout
+
 account_group:
     resource: "@AppBundle/Resources/config/routing/account.yml"
     prefix:     /

@@ -48,12 +48,17 @@
                         </li>
                     {% else %}
                         <li>
-                            <a href="#">Edytuj profil</a>
+                            <a href="{{ path('account_edit') }}">Edytuj profil</a>
+                        </li>
+
+                        <li>
+                            <a href="{{ path('test_index') }}">Testy</a>
+                        </li>
+                        <li>
+                            <a href="{{ logout_path('main') }}">Wyloguj się</a>
                         </li>
                     {% endif %}
-                    <li>
-                        <a href="{{ path('test_index') }}">Testy</a>
-                    </li>
+
                 </ul>
             </div>
             

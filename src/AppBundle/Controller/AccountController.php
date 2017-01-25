@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Controller;
 
+use AppBundle\Form\AccountEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,7 +13,7 @@ class AccountController extends Controller
 {
     public function loginAction(Request $request)
     {
-        
+
         $authenticationUtils = $this->get('security.authentication_utils');
 
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -21,36 +22,77 @@ class AccountController extends Controller
 
         return $this->render('AppBundle:Account:login.html.twig', [
             'last_username' => $lastUsername,
-            'error'         => $error,
+            'error' => $error,
         ]);
     }
-    
-    public function registerAction(Request $request) {
+
+    public function registerAction(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
-        
+
         $accountEntity = new Account();
-        
+
         $form = $this->createRegisterForm($accountEntity);
-        
+
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $passwordEncoder = $this->get('security.password_encoder');
             $password = $passwordEncoder->encodePassword($accountEntity, $accountEntity->getPlainPassword());
             $accountEntity->setPass($password);
-            
+
             $em->persist($accountEntity->getAddress());
             $em->persist($accountEntity);
             $em->flush();
+
+            return $this->redirectToRoute('account_register_success');
         }
-        
+
         return $this->render('AppBundle:Account:register.html.twig', [
-            'form'  => $form->createView()
+            'form' => $form->createView()
         ]);
     }
-    
-    private function createRegisterForm(Account $accountEntity) {
+
+    public function editAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+
+        $accountEntity = $this->getUser();
+
+        $form = $this->createEditForm($accountEntity);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if (!empty($accountEntity->getPlainPassword())) {
+                $passwordEncoder = $this->get('security.password_encoder');
+                $password = $passwordEncoder->encodePassword($accountEntity, $accountEntity->getPlainPassword());
+                $accountEntity->setPass($password);
+            }
+
+            $em->flush();
+
+            return $this->redirectToRoute('account_edit');
+        }
+
+        return $this->render('AppBundle:Account:edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    public function registerSuccessAction()
+    {
+        return $this->render('AppBundle:Account:registerSuccess.html.twig', []);
+    }
+
+    private function createRegisterForm(Account $accountEntity)
+    {
         return $this->createForm(AccountType::class, $accountEntity);
+    }
+
+    private function createEditForm(Account $accountEntity)
+    {
+        return $this->createForm(AccountEditType::class, $accountEntity);
     }
 }

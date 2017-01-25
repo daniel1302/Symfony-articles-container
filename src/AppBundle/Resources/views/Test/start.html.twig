@@ -45,12 +45,14 @@
     </ul>
         
     <div style="text-align: center">
-        <a class="btn btn-primary" href="{{ path('test_question', { slug: test.slug }) }}" role="button">
-            {%  if points|length > 0 %}
-                Kontynuuj test
-            {% else %}
-                Rozpocznij test
-            {% endif %}
-        </a>
+        {% if test.questionos|length < points|length %}
+            <a class="btn btn-primary" href="{{ path('test_question', { slug: test.slug }) }}" role="button">
+                {%  if points|length > 0 %}
+                    Kontynuuj test
+                {% else %}
+                    Rozpocznij test
+                {% endif %}
+            </a>
+        {% endif %}
     </div>
 {% endblock %}

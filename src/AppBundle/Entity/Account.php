@@ -239,7 +239,11 @@ namespace AppBundle\Entity;
         return $this->surname;
     }
     
-    public function setPlainPassword(string $pass): self {
+    public function setPlainPassword($pass): self {
+        if ($pass === null) {
+            $pass = '';
+        }
+
         $this->plainPassword = $pass;
         
         return $this;

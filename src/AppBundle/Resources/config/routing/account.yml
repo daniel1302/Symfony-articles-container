@@ -5,3 +5,11 @@ account_login:
 account_register:
     path:     /rejestracja
     defaults: { _controller: AppBundle:Account:register }
+
+account_register_success:
+    path:     /rejestracja/sukces
+    defaults: { _controller: AppBundle:Account:registerSuccess }
+
+account_edit:
+      path:     /konto/profil
+      defaults: { _controller: AppBundle:Account:edit }
