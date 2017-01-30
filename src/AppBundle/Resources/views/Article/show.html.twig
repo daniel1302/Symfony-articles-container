@@ -1,0 +1,67 @@
+{% extends "AppBundle:Layout:layout.html.twig" %}
+{% form_theme commentForm 'bootstrap_3_layout.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/app/css/pages/article.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    
+    <div class="row">
+        <div>
+            <div id="legend">
+                <legend class="">
+                    {{ article.title }}
+                    <small>
+                        (<a href="{{ path('article_index') }}">powrót do listy artykułów</a>)
+                    </small>
+                </legend>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        {{ content|raw }}
+    </div>
+
+    {% if commentForm is defined %}
+
+        <div class="mt-75 comment-form">
+            {{ form_start(commentForm) }}
+
+            <div class="row">
+                <div class="col-xs-8 col-sm-10 col-md-8">
+                    <div class="form-group">
+                        {{ form_widget(commentForm) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-sm-10 col-md-8">
+                    <div class="form-group">
+                        <button type="submit" id="submit" style="width: 300px;" class="pull-right form-control btn btn-primary">Dodaj komentarz</button>
+                    </div>
+                </div>
+            </div>
+            {{ form_end(commentForm) }}
+        </div>
+    {% endif %}
+
+    <div>
+        {% for comment in article.comments|reverse %}
+
+            <div class="row comment">
+                <div class="col-xs-8 col-sm-10 col-md-8">
+                    <b>{{ comment.author.firstname ~' '~ comment.author.surname }}</b> <small>{{ comment.created|date('Y-m-d H:i:s') }}</small><br><br>
+
+                    {{ comment.content }}
+
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+
+{% endblock %}

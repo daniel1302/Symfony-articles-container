@@ -22,6 +22,10 @@
     <link rel="stylesheet" href="{{ asset('bundles/app/css/layout/admin.css') }}">    
     <link rel="stylesheet" href="{{ asset('bundles/jqueryui/themes/ui-lightness/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('bundles/jqueryui/themes/ui-lightness/theme.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/libs/markitup/skins/markitup/style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/libs/markitup/sets/markdown/style.css') }}" />
+
+
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -40,7 +44,10 @@
 
     <script src="{{ asset('bundles/datatables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('bundles/datatables/media/js/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bundles/app/js/Layout/admin.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/layout/admin.js') }}"></script>
+
+    <script src="{{ asset('bundles/app/libs/markitup/jquery.markitup.js') }}"></script>
+    <script src="{{ asset('bundles/app/libs/markitup/sets/markdown/set.js') }}"></script>
 {% endblock %}
 
 
@@ -93,6 +100,31 @@
                         <ul class="treeview-menu">
                             <li><a href="{{ path('admin_test_index') }}"><i class="fa fa-circle-o"></i> Testy</a></li>
                             
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Tagi</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ path('admin_tag_index') }}"><i class="fa fa-circle-o"></i> Lista tagów</a></li>
+                            <li><a href="{{ path('admin_tag_add') }}"><i class="fa fa-circle-o"></i> Dodaj tag</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Artykuły</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ path('admin_article_index') }}"><i class="fa fa-circle-o"></i> Lista artykułów</a></li>
                         </ul>
                     </li>
                 </ul>

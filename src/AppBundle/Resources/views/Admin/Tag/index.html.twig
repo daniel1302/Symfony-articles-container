@@ -1,0 +1,10 @@
+{% extends "AppBundle:Layout:admin.html.twig" %}
+
+{% block contentTitle %}Lista tagów{% endblock %}
+{% block content %}
+    {% for tag in tags %}
+        <a href="{{ path('admin_tag_edit', {id: tag.id}) }}">
+            <button type="submit" class="btn btn-primary">{{ tag.name }}</button>
+        </a>
+    {% endfor %}
+{% endblock %}

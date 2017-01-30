@@ -6,3 +6,15 @@ table[rel="datatables"] .button {
     display: inline-block;
     margin: 0 5px;
 }
+
+
+*[rel="markitup-markdown"] {
+    width: 100%;
+    min-height: 400px;
+}
+.markItUp {
+    width: 100%;
+}
+.markItUpEditor {
+    background-image: none;
+}

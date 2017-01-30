@@ -1,0 +1,39 @@
+AppBundle\Entity\Article:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ArticleRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 255
+        slug:
+            type: string
+            length: 255
+            unique: true
+        status:
+            type: integer
+        created:
+            type: datetime
+    manyToOne:
+        author:
+            targetEntity: Account
+            joinColumn:
+                name: id_author
+                referencedColumnName: id
+
+    oneToMany:
+           comments:
+               targetEntity: Comment
+               mappedBy: article
+
+    oneToOne:
+           content:
+               targetEntity: ArticleContent
+               inversedBy: article
+    lifecycleCallbacks: {  }

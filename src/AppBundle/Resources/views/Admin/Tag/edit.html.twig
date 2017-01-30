@@ -1,0 +1,19 @@
+{% extends "AppBundle:Layout:admin.html.twig" %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+
+{% block contentTitle %}Edytuj tag{% endblock %}
+
+{% block content %}
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Edytuj" />
+    {{ form_end(form) }}
+
+
+{% endblock %}
+
+{% block contentFooter %}
+    <a href="{{ path('admin_tag_index') }}">Powrót do listy tagów</a>
+{% endblock %}

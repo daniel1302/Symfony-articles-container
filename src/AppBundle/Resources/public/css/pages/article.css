@@ -1,0 +1,9 @@
+.comment {
+    margin-bottom: 10px;
+    border-top: #ccc solid 1px;
+    padding: 5px 0 0;
+}
+
+.comment-form {
+    margin-bottom: 40px;
+}

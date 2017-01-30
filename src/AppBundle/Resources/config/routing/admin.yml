@@ -1,3 +1,11 @@
+admin_tag_group:
+    resource: "@AppBundle/Resources/config/routing/admin/tag.yml"
+    prefix:     /tag
+
+admin_article_group:
+    resource: "@AppBundle/Resources/config/routing/admin/article.yml"
+    prefix:     /artykul
+
 admin_test_group:
     resource: "@AppBundle/Resources/config/routing/admin/test.yml"
     prefix:     /test

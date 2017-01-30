@@ -1,0 +1,38 @@
+AppBundle\Entity\Tag:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\TagRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '45'
+            unique: true
+        slug:
+            type: string
+            length: '60'
+            unique: true
+    manyToOne:
+        parent:
+            targetEntity: Tag
+            inversedBy: children
+            joinColumn:
+                name: id_parent
+                referencedColumnName: id
+
+    oneToMany:
+        children:
+            targetEntity: Tag
+            mappedBy: parent
+
+
+
+
+
+
+    lifecycleCallbacks: {  }

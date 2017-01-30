@@ -2,3 +2,14 @@ services:
 #    app.example:
 #        class: AppBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    app.article_parser:
+        class: AppBundle\Services\ArticleParser
+        arguments: ~
+
+
+    app.parser_code_highlighter:
+        class: AppBundle\Services\TextParser\CodeHighlighter
+        arguments: ~
+        tags:
+            - { name: text_parser.article }
