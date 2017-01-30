@@ -35,30 +35,26 @@ class ArticleController extends Controller
         $em = $this->getDoctrine()->getManager();
         $comment = new Comment();
 
-        if ($this->getUser()) {
-            $commentForm = $this->createCommentForm($comment);
 
-            $commentForm->handleRequest($request);
-            if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-                $comment->setCreated(new \DateTime('now'));
-                $comment->setArticle($article);
-                $comment->setAuthor($this->getUser());
+        $commentForm = $this->createCommentForm($comment);
 
-                $em->persist($comment);
-                $em->flush();
-                $this->addFlash('message', 'Komentarz został dodany');
-                return $this->redirectToRoute('article_show', ['slug' => $article->getSlug()]);
-            }
+        $commentForm->handleRequest($request);
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $comment->setCreated(new \DateTime('now'));
+            $comment->setArticle($article);
+            $comment->setAuthor($this->getUser());
 
-            $formView = $commentForm->createView();
-        } else {
-            $formView = null;
+            $em->persist($comment);
+            $em->flush();
+            $this->addFlash('message', 'Komentarz został dodany');
+            return $this->redirectToRoute('article_show', ['slug' => $article->getSlug()]);
         }
+
 
 
         return $this->render('AppBundle:Article:show.html.twig', [
             'article'       => $article,
-            'commentForm'   => $formView,
+            'commentForm'   =>  $commentForm->createView(),
             'content'       => $this->get('app.article_parser')->parse($article->getContent()->getContent())
         ]);
     }

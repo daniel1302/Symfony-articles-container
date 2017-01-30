@@ -51,6 +51,9 @@
             
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{{ path('article_index') }}">Artykuły</a>
+                    </li>
                     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li>
                             <a href="{{ path('account_register') }}">Zarejestruj się</a>

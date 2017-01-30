@@ -22,11 +22,11 @@
         </div>
     </div>
 
-    <div>
+    <div class="article-content">
         {{ content|raw }}
     </div>
 
-    {% if commentForm is defined %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
         <div class="mt-75 comment-form">
             {{ form_start(commentForm) }}
