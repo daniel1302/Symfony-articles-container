@@ -1,0 +1,8 @@
+admin_article_edit:
+    path:     /{id}/edytuj
+    defaults: { _controller: "AppBundle:Admin/Article:edit" }
+    methods:  [GET, POST]
+
+admin_article_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Admin/Article:index" }

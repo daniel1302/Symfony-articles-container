@@ -1,0 +1,20 @@
+AppBundle\Entity\ArticleContent:
+    group_sequence: 
+#        - Default
+#        - Strict
+   
+
+
+    properties:
+        short:
+            - Length:
+                min: 120
+                max: 2000
+                minMessage: "Skrót jest za krótki. Minimalna długość to {{ limit }} znaków"
+                maxMessage: "Skrót jest za długi. Maksymalna długość to {{ limit }} znaków"
+        content:
+            - Length:
+                min: 120
+                max: 6535
+                minMessage: "Treść jest za krótka. Minimalna długość to {{ limit }} znaków"
+                maxMessage: "Treść jest za długa. Maksymalna długość to {{ limit }} znaków"

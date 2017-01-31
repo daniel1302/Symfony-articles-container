@@ -1,0 +1,26 @@
+AppBundle\Entity\ArticleContent:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ArticleContentRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        type:
+            type: integer
+        created:
+            type: datetime
+        content:
+            type: text
+        short:
+            type: string
+            length: 2048
+
+    oneToOne:
+        article:
+            targetEntity: Article
+            mappedBy: content
+    lifecycleCallbacks: {  }

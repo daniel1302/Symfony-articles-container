@@ -9,17 +9,29 @@
 {% endblock %}
 
 {% block stylesheets %}
-    
-    <link href="{{ asset('bundles/app/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('bundles/bootstrap/dist/css/bootstrap.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/libs/markitup/skins/markitup/style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/libs/markitup/sets/markdown/style.css') }}" />
+
     <link href="{{ asset('bundles/app/css/layout.css') }}" rel="stylesheet">
-    
+
+
+
 {% endblock %}
 
 {% block javascripts %}
-    
-    <script src="{{ asset('bundles/app/js/jquery.js') }}"></script>
-    <script src="{{ asset('bundles/app/js/bootstrap.min.js') }}"></script>
-    
+
+    <script src="{{ asset('bundles/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('bundles/jqueryui/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('bundles/bootstrap/dist/js/bootstrap.js') }}"></script>
+
+    <script src="{{ asset('bundles/app/libs/markitup/jquery.markitup.js') }}"></script>
+    <script src="{{ asset('bundles/app/libs/markitup/sets/markdown/set.js') }}"></script>
+
+
+    <script src="{{ asset('bundles/app/js/layout/layout.js') }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -39,6 +51,9 @@
             
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{{ path('article_index') }}">Artykuły</a>
+                    </li>
                     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li>
                             <a href="{{ path('account_register') }}">Zarejestruj się</a>
@@ -81,6 +96,12 @@
         {% for flashMessage in app.session.flashbag.get('error') %}
 
             <p class="bg-danger flash-bag">{{ flashMessage }}</p>
+
+        {% endfor %}
+
+        {% for flashMessage in app.session.flashbag.get('message') %}
+
+            <p class="bg-success flash-bag">{{ flashMessage }}</p>
 
         {% endfor %}
         <div>

@@ -12,7 +12,12 @@ account_group:
 test_group:
     resource: "@AppBundle/Resources/config/routing/test.yml"
     prefix:     /test
-    
+
+article_group:
+    resource: "@AppBundle/Resources/config/routing/article.yml"
+    prefix:     /artykul
+
+
 admin_group:
     resource: "@AppBundle/Resources/config/routing/admin.yml"
     prefix:     /admin

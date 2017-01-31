@@ -4,7 +4,6 @@ namespace AppBundle\Controller;
 use AppBundle\Form\AccountEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use AppBundle\Entity\Account;
 use AppBundle\Form\AccountType;

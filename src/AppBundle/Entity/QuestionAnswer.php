@@ -86,4 +86,3 @@ class QuestionAnswer
         return $this->question;
     }
 }
-

@@ -1,0 +1,12 @@
+AppBundle\Entity\Tag:
+    group_sequence: 
+#        - Default
+#        - Strict
+   
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: name
+            errorPath: name
+            message: "Taki tag istnieje"
+
+    properties: ~

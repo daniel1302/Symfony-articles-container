@@ -9,3 +9,20 @@ footer {
 p.flash-bag {
     padding: 15px;
 }
+
+*[rel="markitup-markdown"] {
+    width: 100%;
+    min-height: 400px;
+}
+.markItUp {
+    width: 100%;
+}
+.markItUpEditor {
+    background-image: none;
+}
+.mt-25 {
+    margin-top: 25px;
+}
+.mt-75 {
+    margin-top: 75px;
+}

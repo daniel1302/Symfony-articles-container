@@ -1,0 +1,11 @@
+article_index:
+    path:     /
+    defaults: { _controller: AppBundle:Article:index }
+
+article_new:
+    path:     /dodaj
+    defaults: { _controller: AppBundle:Article:new }
+
+article_show:
+    path:     /{slug}
+    defaults: { _controller: AppBundle:Article:show }
