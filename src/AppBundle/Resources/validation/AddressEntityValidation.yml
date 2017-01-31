@@ -7,10 +7,10 @@ AppBundle\Entity\Address:
 
         street: 
             - Regex:
-                pattern: '/^(|[a-z0-9\040\.\-]+)$/'
+                pattern: '/^(|[a-z0-9\040\.\-żźćńąśłęół]+)$/'
                 message: "Podaj poprawną nazwę ulicy"
                 
         city:
             - Regex:
-                pattern: '/^(|[a-z0-9\040\.\-]+)$/'
+                pattern: '/^(|[a-z0-9\040\.\-żźćńąśłęół]+)$/'
                 message: "Podaj poprawną nazwę miejscowości"
