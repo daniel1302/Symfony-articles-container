@@ -4,7 +4,9 @@ namespace AppBundle\Model\DocumentManager;
 
 
 use AppBundle\Document\DocumentInterface;
+use AppBundle\Document\UserActivity;
 use MongoDB\Database;
+use MongoDB\Model\BSONDocument;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -45,20 +47,29 @@ abstract class DocumentManager implements DocumentManagerInterface
         $this->serializer = new Serializer($normalizers, $encoders);
     }
 
+    public function update(DocumentInterface $document): bool
+    {
+        $collection = $this->database->selectCollection($this->getCollectionName());
+
+        $collection->updateOne([
+            DocumentManagerInterface::KEY_ID => $document->getId()
+        ], [
+            '$set' => $this->serializeObject($document)
+        ]);
+
+        return true;
+    }
+
     public function insert(DocumentInterface $document): bool
     {
-        $documentId = md5(microtime(true));
+        if (empty($document->getId())) {
+            $documentId = md5(microtime(true));
 
-
-        $document->setId($documentId);
-
-        $serializedJson = $this->serializer->serialize($document, 'json');
+            $document->setId($documentId);
+        }
 
         $collection = $this->database->selectCollection($this->getCollectionName());
-        $collection->insertOne([
-            DocumentManagerInterface::KEY_ID    => $documentId,
-            DocumentManagerInterface::KEY_OBJ   => $serializedJson
-        ]);
+        $collection->insertOne($this->serializeObject($document));
 
         return true;
     }
@@ -74,20 +85,36 @@ abstract class DocumentManager implements DocumentManagerInterface
             return null;
         }
 
-
+        if (!is_array($row)) {
+            $row = $row->getArrayCopy();
+        }
 
         return $this->deserializeDocument($row);
     }
 
-    public function findAll(): array
+    public function findAll(array $params = [], int $limit = null, int $offset = null): array
     {
+        if ($limit === null) {
+            $limit = PHP_INT_MAX;
+        }
+        if ($offset === null) {
+            $offset = 0;
+        }
+
         $collection = $this->database->selectCollection($this->getCollectionName());
 
         $result = [];
-        $cursor = $collection->find();
-
+        $cursor = $collection->find($params);
+        /** @var BSONDocument $doc */
         foreach ($cursor as $doc) {
-            $result[] = $this->deserializeDocument($doc);
+            if (--$offset > 0) {
+                continue;
+            }
+            if (--$limit < 0) {
+                break;
+            }
+
+            $result[] = $this->deserializeDocument($doc->getArrayCopy());
         }
 
         return $result;
@@ -104,5 +131,31 @@ abstract class DocumentManager implements DocumentManagerInterface
         $documentObject = $this->serializer->deserialize($serializedJson, $this->getClassName(), 'json');
 
         return $documentObject;
+    }
+
+    protected function serializeObject(DocumentInterface $document) {
+
+
+        $serializedJson = $this->serializer->serialize($document, 'json');
+
+
+        return [
+            DocumentManagerInterface::KEY_ID    => $document->getId(),
+            DocumentManagerInterface::KEY_OBJ   => $serializedJson
+        ];
+    }
+
+    public function count(array $params = []): int
+    {
+        $collection = $this->database->selectCollection($this->getCollectionName());
+
+        $cursor = $collection->find($params);
+
+        $c = 0;
+        foreach ($cursor as $item) {
+            $c++;
+        }
+
+        return $c;
     }
 }

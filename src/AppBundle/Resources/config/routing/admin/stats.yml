@@ -1,0 +1,9 @@
+admin_stats_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Admin/Stats:index" }
+    methods:  GET
+
+admin_stats_os:
+    path:     /
+    defaults: { _controller: "AppBundle:Admin/Stats:os" }
+    methods:  GET

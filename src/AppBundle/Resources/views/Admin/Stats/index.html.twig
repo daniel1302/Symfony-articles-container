@@ -1,0 +1,31 @@
+{% extends "AppBundle:Layout:admin.html.twig" %}
+
+{% block contentTitle %}Lista testów{% endblock %}
+{% block content %}
+<h3>Mamy zapisanych {{ num }} wpisów w logach</h3>
+
+    <p>Ostatnie 1000 wpisów</p>
+
+    <table rel="datatables">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>IP</th>
+            <th>Data</th>
+            <th>Strona</th>
+            <th>User Agent</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in rows %}
+            <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.ip }}</td>
+                <td>{{ row.getDate()|date('Y-m-d H:i:s') }}</td>
+                <td>{{ row.page }}</td>
+                <td>{{ row.userAgent }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

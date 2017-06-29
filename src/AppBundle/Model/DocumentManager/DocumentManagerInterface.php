@@ -26,9 +26,25 @@ interface DocumentManagerInterface
     public function find(string $id) : ?DocumentInterface;
 
     /**
-     * List all objects from db
+     * @param array $params
+     * @param int|null $limit
+     * @param int|null $offset
      *
      * @return array
      */
-    public function findAll() : array;
+    public function findAll(array $params = [], int $limit = null, int $offset = null) : array;
+
+    /**
+     * Cont rows in db
+     * @return int
+     */
+    public function count(): int;
+
+    /**
+     * Update document
+     *
+     * @param DocumentInterface $document
+     * @return bool
+     */
+    public function update(DocumentInterface $document): bool;
 }

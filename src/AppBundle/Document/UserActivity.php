@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Document;
 
+use DateTime;
 
 class UserActivity implements DocumentInterface
 {
@@ -12,7 +13,7 @@ class UserActivity implements DocumentInterface
     /**
      * @var float
      */
-    private $uTime;
+    private $time;
 
     /**
      * @var string
@@ -53,17 +54,17 @@ class UserActivity implements DocumentInterface
     /**
      * @return float
      */
-    public function getUTime()
+    public function getTime()
     {
-        return $this->uTime;
+        return $this->time;
     }
 
     /**
      * @param float $uTime
      */
-    public function setUTime($uTime)
+    public function setTime($time)
     {
-        $this->uTime = $uTime;
+        $this->time = $time;
     }
 
     /**
@@ -128,5 +129,10 @@ class UserActivity implements DocumentInterface
     public function setUserAgent($userAgent)
     {
         $this->userAgent = $userAgent;
+    }
+
+    public function getDate(): DateTime
+    {
+        return DateTIme::createFromFormat('U', $this->time);
     }
 }

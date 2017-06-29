@@ -14,7 +14,16 @@ services:
         tags:
             - { name: text_parser.article }
 
+    app.user_activity_document_manager:
+        class: AppBundle\Model\DocumentManager\UserActivityDocumentManager
+        arguments: [ "@mongo.connection" ]
+
+    app.operating_system_document_manager:
+        class: AppBundle\Model\DocumentManager\OperatingSystemDocumentManager
+        arguments: [ "@mongo.connection" ]
+
     app.exception_listener:
         class: AppBundle\EventListener\LoggerRequestListener
+        arguments: [ "@app.user_activity_document_manager", "@app.operating_system_document_manager" ]
         tags:
             - { name: kernel.event_listener, event: kernel.request }
