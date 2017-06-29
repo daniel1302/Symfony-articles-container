@@ -35,12 +35,7 @@ class AdminController extends Controller
         $mongo = $this->get('mongo.connection.foo_db');
 
 
-        $userActivity = new UserActivity();
-        $userActivity->setIp($request->getClientIp());
-        $userActivity->setPage($request->getRequestUri());
-        $userActivity->setSessionId($request->getSession()->getId());
-        $userActivity->setUserAgent($request->server->get('USER_AGENT'));
-        $userActivity->setUTime(microtime(true));
+
 
 
         var_dump($userActivity);

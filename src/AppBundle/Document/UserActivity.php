@@ -2,8 +2,13 @@
 namespace AppBundle\Document;
 
 
-class UserActivity
+class UserActivity implements DocumentInterface
 {
+    /**
+     * @var string
+     */
+    private $id;
+
     /**
      * @var float
      */
@@ -28,6 +33,22 @@ class UserActivity
      * @var string
      */
     private $userAgent;
+
+    /**
+     * @return string
+     */
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $id
+     */
+    public function setId(string $id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return float

@@ -13,3 +13,8 @@ services:
         arguments: ~
         tags:
             - { name: text_parser.article }
+
+    app.exception_listener:
+        class: AppBundle\EventListener\LoggerRequestListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
