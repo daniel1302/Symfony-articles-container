@@ -68,3 +68,38 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+
+mongo_db_bundle:
+
+    data_collection: true # set to false to disable data collection
+
+    # clients section, here you can define connection to different servers or with different credentials
+    clients:
+
+      foo_client_name:    #choose your client name
+        hosts:            # Required - will compose your mongo connection url (mongodb://host1:3062,host2:27017)
+            - { host: "%mongo_host%", port: "%mongo_port" } # this
+        username:         ''
+        password:         ''
+        replicaSet:       '' # default null (no replica) (experimental)
+        ssl:              false
+        connectTimeoutMS: 3000 # default null (no timeout)
+        readPreference:   primaryPreferred # see https://docs.mongodb.com/manual/reference/read-preference/#primary for info
+
+      other_client:   ~ # same as upper configuration
+
+    # connections section, theese represents your Database object reference
+    connections:
+
+      foo_db:
+        client_name:    foo_client_name # Required - your client name in clients section
+        database_name:  'foo_db' # Required
+#
+#      other_db:
+#        client_name:    ~
+#        database_name:  ~
+#
+#      foo_db_2:
+#        client_name:    ~
+#        database_name:  ~

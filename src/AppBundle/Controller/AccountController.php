@@ -2,6 +2,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\AccountEditType;
+use AppBundle\Utils\FormErrorParser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -35,6 +36,7 @@ class AccountController extends Controller
 
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $passwordEncoder = $this->get('security.password_encoder');
@@ -44,7 +46,6 @@ class AccountController extends Controller
             $em->persist($accountEntity->getAddress());
             $em->persist($accountEntity);
             $em->flush();
-
             return $this->redirectToRoute('account_register_success');
         }
 

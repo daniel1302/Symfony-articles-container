@@ -2,12 +2,14 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    database_driver:   pdo_pgsql
+    database_driver:   pdo_mysql
     database_host:     localhost
-    database_port:     5432
-    database_name:     postgres
-    database_user:     Daniel1
-    database_password: Daniel1
+    database_port:     null
+    database_name:     articles
+    database_user:     root
+    database_password: pass
+    mongo_host: localhost
+    mongo_port: 27017
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
