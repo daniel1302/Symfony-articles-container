@@ -1,0 +1,24 @@
+{% extends "AppBundle:Layout:admin.html.twig" %}
+
+{% block contentTitle %}Lista testów{% endblock %}
+{% block content %}
+<h3>Systemy operacyjne</h3>
+<p>Lista i systemów i liczba osób które nas odwiedziły z konkretnym systemem operacyjnym</p>
+    
+    <table class="table-hover table-bordered" style="width: 100%;">
+        <thead>
+        <tr>
+            <th>Nazwa systemu</th>
+            <th>Ilość odwiedzin</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for name, num in systems %}
+            <tr>
+                <td>{{ name }}</td>
+                <td>{{ num }}</td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

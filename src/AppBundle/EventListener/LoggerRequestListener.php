@@ -49,7 +49,7 @@ class LoggerRequestListener
         $userActivity->setTime(time());
 
 
-//        $this->userActivityDocumentManager->insert($userActivity);
+        $this->userActivityDocumentManager->insert($userActivity);
 
         $this->detectOS($request->server->get('HTTP_USER_AGENT'));
     }
@@ -71,8 +71,5 @@ class LoggerRequestListener
             $doc->setNum($doc->getNum()+1);
             $this->osDocumentManager->update($doc);
         }
-
-        var_dump($doc);
-        die();
     }
 }

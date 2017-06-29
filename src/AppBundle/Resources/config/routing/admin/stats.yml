@@ -4,6 +4,6 @@ admin_stats_index:
     methods:  GET
 
 admin_stats_os:
-    path:     /
+    path:     /systemy-operacyjne
     defaults: { _controller: "AppBundle:Admin/Stats:os" }
     methods:  GET
